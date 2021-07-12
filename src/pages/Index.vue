@@ -46,7 +46,7 @@ export default defineComponent({
       } else {
         data = {
           label: 'On a break!',
-          color: 'secondary',
+          color: 'negative',
           totalTime: 5,
           baseTime: 25
         }
@@ -104,7 +104,7 @@ export default defineComponent({
     }
 
     const percentage = computed(() =>
-      minutes.value < 25 ? minutes.value / 25 * 100 : 100 - (minutes.value - 25) / 5 * 100
+      minutes.value < 25 ? (minutes.value + (seconds.value / 60)) / 25 * 100 : 100 - (minutes.value - 25 + (seconds.value / 60)) / 5 * 100
     )
 
     setInterval(getNow, 1000)
