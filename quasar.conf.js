@@ -137,9 +137,9 @@ module.exports = configure(function (ctx) {
       },
 
       manifest: {
-        name: 'Pomodoro App',
-        short_name: 'Pomodoro App',
-        description: 'a simple team pomodoro app',
+        name: 'Team Pomodoro App',
+        short_name: 'Team Pomodoro App',
+        description: 'Create team sync. Be more focused. Get more done',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',

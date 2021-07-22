@@ -17,7 +17,7 @@
           <q-menu anchor="bottom left" self="top right" class="q-mt-lg">
             <div class="row q-ma-lg">
               <div class="column">
-                <div v-for="(person,index) in people"  :key="index" >
+                <div v-for="(person,index) in people" class="q-mt-sm" :key="index" >
                   <div class="row align-center ">
                     <div class="q-mr-lg">
                       <p class="person--name text-h6 q-mb-none">{{person.name}}</p>
@@ -25,21 +25,21 @@
                     </div>
                     <q-space/>
                     <p class="person--time q-mb-none text-h6 text-grey-13"> {{ String((new Date().getUTCHours()  + person.offset) % 24).padStart(2,'0') }}:{{ String(new Date().getUTCMinutes()).padStart(2,'0') }}</p>
-                    <q-icon name="work" class="q-mt-sm q-ml-sm" color="grey-13 "/>
+                    <q-icon :name="workIcon(person.offset)" size="20px" class="q-mt-xs q-ml-sm" color="grey-13 "/>
                   </div>
                 </div>
               </div>
               <q-separator vertical class="q-mx-md"/>
               <div class="column">
-                <div v-for="(person,index) in people2"  :key="index" >
+                <div v-for="(person,index) in people2" class="q-mt-sm" :key="index" >
                   <div class="row align-center ">
                     <div class="q-mr-lg">
                       <p class="person--name text-h6 q-mb-none">{{person.name}}</p>
                       <p class="person--location text-subtitle2 q-mb-none text-grey-13">{{ person.location }}</p>
                     </div>
                     <q-space/>
-                    <p class="person--time q-mb-none text-h6 text-grey-13"> 7:50</p>
-                    <q-icon name="work" class="q-mt-sm q-ml-sm" color="grey-13 "/>
+                    <p class="person--time q-mb-none text-h6 text-grey-13">  {{ String((new Date().getUTCHours()  + person.offset) % 24).padStart(2,'0') }}:{{ String(new Date().getUTCMinutes()).padStart(2,'0') }}</p>
+                    <q-icon :name="workIcon(person.offset)" size="20px" class="q-mt-xs q-ml-sm" color="grey-13 "/>
                   </div>
                 </div>
               </div>
@@ -137,7 +137,7 @@ const people2 = [
   },
   {
     name: 'Rafael',
-    location: 'Sao Paolo',
+    location: 'São Paolo',
     offset: -3
   }
 ]
@@ -162,6 +162,13 @@ export default defineComponent({
       personState.value = !personState.value
     }
     const leftDrawerOpen = ref(false)
+
+    const workIcon = (timeOffset) => {
+      const hour = (new Date().getUTCHours() + timeOffset) % 24
+
+      return hour < 8 || hour > 17 ? 'work' : 'night_shelter'
+    }
+
     return {
       toggleDarkState,
       toggleLeftDrawer () {
@@ -172,7 +179,8 @@ export default defineComponent({
       soundState,
       togglePersonState,
       people,
-      people2
+      people2,
+      workIcon
     }
   },
   computed: {
@@ -190,7 +198,14 @@ export default defineComponent({
       // console.log($q.dark.isActive)
       return $q.dark.isActive ? 'secondary' : 'primary'
     }
-
   }
 })
 </script>
+
+<style>
+
+.person--location{
+  margin-top: -5px;
+}
+
+</style>

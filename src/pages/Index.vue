@@ -73,11 +73,11 @@ export default defineComponent({
       // console.log(minutes.value)
       if (minutes.value === 0 && seconds.value === 0) {
         // console.log(minutes.value)
-        notifyMe('Time to work!')
+        notifyMe('Let’s focus! 😀')
       }
       if (minutes.value === 25 && seconds.value === 0) {
         // console.log(minutes.value)
-        notifyMe('Time to relax!')
+        notifyMe('Time to relax! 🧘🏽‍♀️')
       }
     }
 
