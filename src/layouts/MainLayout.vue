@@ -53,17 +53,6 @@
       <router-view  :soundStatus="soundState"/>
     </q-page-container>
 
-    <!-- <q-footer reveal elevated class="bg-grey-10 text-white">
-      <q-toolbar class="mx-auto row justify-evenly" >
-        <p>© 2020 Sparkademy AG</p>
-        <p> Terms & Conditions</p>
-        <p>Privacy Policy</p>
-        <p>FAQ</p>
-        <p>Contact</p>
-        <q-icon icon="twitter"/>
-      </q-toolbar>
-    </q-footer> -->
-
   </q-layout>
 </template>
 <script>
@@ -166,7 +155,7 @@ export default defineComponent({
     const workIcon = (timeOffset) => {
       const hour = (new Date().getUTCHours() + timeOffset) % 24
 
-      return hour < 8 || hour > 17 ? 'work' : 'night_shelter'
+      return hour < 8 || hour > 17 ? 'night_shelter' : 'work'
     }
 
     return {
