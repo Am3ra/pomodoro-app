@@ -1,5 +1,4 @@
 <template>
-  <q-pa>
 
     <div class="container flex justify-evenly items-center q-mt-xl">
       <div class="text-h1 text-center">
@@ -18,8 +17,12 @@
       </p>
       </q-circular-progress>
     <!-- {{ currentTime }} -->
+    <audio controls="controls" style="display:none;" id="beep">
+      <source src="../assets/stop.ogg" type="audio/ogg"/>
+      <source src="../assets/stop.mp3" type="audio/mp3"/>
+    </audio>
     </div>
-  </q-pa>
+
 </template>
 
 <script>
@@ -27,8 +30,10 @@ import { defineComponent, ref, computed } from 'vue'
 
 export default defineComponent({
   name: 'PageIndex',
-
-  setup () {
+  props: {
+    soundStatus: Boolean
+  },
+  setup (props) {
     let today = new Date()
     const minutes = ref(-1)
     const seconds = ref(0)
@@ -46,7 +51,7 @@ export default defineComponent({
       } else {
         data = {
           label: 'On a break!',
-          color: 'negative',
+          color: 'secondary',
           totalTime: 5,
           baseTime: 25
         }
@@ -55,6 +60,9 @@ export default defineComponent({
     })
 
     function getNow () {
+      // console.log(props)
+
+      console.log(props.soundStatus)
       // console.log('get time', percentage.value)
       loading.value = false
       today = new Date()
@@ -76,6 +84,9 @@ export default defineComponent({
     Notification.requestPermission()
 
     function notifyMe (text) {
+      if (props.soundStatus) {
+        document.getElementById('beep').play()
+      }
       if (!window.Notification) {
         console.log('Browser does not support notifications.')
       } else {
